@@ -15,10 +15,10 @@ const appendNewTodo = (todoText: string) => {
 </script>
 
 <template>
-  <NewTodo @add-todo="appendNewTodo" />
-
-  <TodoList :todolist="todolist" />
-  <main></main>
+  <section class="todoapp">
+    <NewTodo @add-todo="appendNewTodo" />
+    <TodoList :todolist="todolist" />
+  </section>
 
   <footer class="info">
     <p>Double-click to edit a todo</p>

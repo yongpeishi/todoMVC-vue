@@ -15,11 +15,9 @@ const addTodo = () => {
 </script>
 
 <template>
-  <section class="todoapp">
-    <header class="header">
-      <h1>todos</h1>
-      <input class="new-todo" type="text" placeholder="What needs to be done?" v-model="newTodoText"
-        @keyup.enter="addTodo" autofocus />
-    </header>
-  </section>
+  <header class="header">
+    <h1>todos</h1>
+    <input class="new-todo" type="text" placeholder="What needs to be done?" v-model="newTodoText"
+      @keyup.enter="addTodo" autofocus />
+  </header>
 </template>

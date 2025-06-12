@@ -7,9 +7,13 @@ const { todolist } = defineProps<{
 </script>
 
 <template>
-  <ul class="todo-list">
-    <li v-for="item in todolist" :key="item.id">
-      {{ item.text }}
-    </li>
-  </ul>
+  <section class="main">
+    <ul class="todo-list">
+      <li v-for="item in todolist" :key="item.id">
+        <div class="view">
+          <label>{{ item.text }}</label>
+        </div>
+      </li>
+    </ul>
+  </section>
 </template>
