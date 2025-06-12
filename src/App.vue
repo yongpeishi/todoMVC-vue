@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import type { TodoListProps } from './types'
 import NewTodo from './components/NewTodo.vue'
 import TodoList from './components/TodoList.vue'
-import type { TodoListProps } from './types'
+import AppFooter from './components/AppFooter.vue'
 
 const id = ref(0)
 const todolist = ref<TodoListProps>([])
+const todoCount = ref(0)
 
 const appendNewTodo = (todoText: string) => {
   todolist.value.push({
@@ -13,12 +15,20 @@ const appendNewTodo = (todoText: string) => {
     text: todoText,
   })
 }
+
+watch(todolist, (newList) => {
+  todoCount.value = newList.length
+}, { deep: true })
+
 </script>
 
 <template>
   <section class="todoapp">
     <NewTodo @add-todo="appendNewTodo" />
-    <TodoList :todolist="todolist" />
+    <div v-if="todoCount > 0">
+      <TodoList :todolist="todolist" />
+      <AppFooter :count="todoCount" />
+    </div>
   </section>
 
   <footer class="info">
