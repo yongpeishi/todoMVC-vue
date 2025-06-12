@@ -1,7 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+import NewTodo from './components/NewTodo.vue'
+
+const id = ref(0)
+const todolist = ref<{ id: number; text: string }[]>([])
+
+const appendNewTodo = (todoText: string) => {
+  todolist.value.push({
+    id: id.value++,
+    text: todoText,
+  })
+}
+</script>
 
 <template>
-  <header></header>
+  <NewTodo @add-todo="appendNewTodo" />
 
   <main></main>
 
