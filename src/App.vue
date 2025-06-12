@@ -2,9 +2,10 @@
 import { ref } from 'vue'
 import NewTodo from './components/NewTodo.vue'
 import TodoList from './components/TodoList.vue'
+import type { TodoListProps } from './types'
 
 const id = ref(0)
-const todolist = ref<{ id: number; text: string }[]>([])
+const todolist = ref<TodoListProps>([])
 
 const appendNewTodo = (todoText: string) => {
   todolist.value.push({

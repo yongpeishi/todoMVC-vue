@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { TodoListProps } from '@/types';
 import { defineProps } from 'vue';
 
 const { todolist } = defineProps<{
-  todolist: { id: number; text: string }[]
+  todolist: TodoListProps
 }>()
 </script>
 
