@@ -21,6 +21,8 @@ const addTodo = () => {
       placeholder="What needs to be done?"
       v-model="newTodoText"
       @keyup.enter="addTodo"
+      autofocus
+      class="new-todo"
     />
   </header>
 </template>
