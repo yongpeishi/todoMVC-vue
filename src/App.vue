@@ -13,6 +13,7 @@ const appendNewTodo = (todoText: string) => {
   todolist.value.push({
     id: id.value++,
     text: todoText,
+    completed: false
   })
 }
 
