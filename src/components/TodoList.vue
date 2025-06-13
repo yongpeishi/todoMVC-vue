@@ -5,10 +5,14 @@ const { todolist } = defineProps<{
   todolist: TodoListProps
 }>()
 
-const emit = defineEmits(['toggle-complete'])
+const emit = defineEmits(['toggle-complete', 'delete-item'])
 
 const toggleComplete = (itemId: number) => {
   emit('toggle-complete', itemId)
+}
+
+const deleteItem = (itemId: number) => {
+  emit('delete-item', itemId)
 }
 </script>
 
@@ -19,7 +23,7 @@ const toggleComplete = (itemId: number) => {
         <div class="view">
           <input class="toggle" type="checkbox" :checked="item.completed" @click="toggleComplete(item.id)" />
           <label>{{ item.text }}</label>
-          <button class="destroy"></button>
+          <button class="destroy" @click="deleteItem(item.id)"></button>
         </div>
       </li>
     </ul>

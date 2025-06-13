@@ -25,6 +25,13 @@ const toggleCompletedState = (id: number) => {
   }
 }
 
+const deleteItem = (id: number) => {
+  const index = todolist.value.findIndex(item => item.id == id)
+  if (index !== -1) {
+    todolist.value.splice(index, 1)
+  }
+}
+
 watch(todolist, (newList) => {
   todoCount.value = newList.length
 }, { deep: true })
@@ -35,7 +42,7 @@ watch(todolist, (newList) => {
   <section class="todoapp">
     <NewTodo @add-todo="appendNewTodo" />
     <div v-if="todoCount > 0">
-      <TodoList :todolist="todolist" @toggle-complete="toggleCompletedState" />
+      <TodoList :todolist="todolist" @toggle-complete="toggleCompletedState" @delete-item="deleteItem" />
       <AppFooter :count="todoCount" />
     </div>
   </section>
