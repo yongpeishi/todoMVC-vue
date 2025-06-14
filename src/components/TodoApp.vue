@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router';
 import { useLocalStorage } from '@vueuse/core'
 
 import type { TodoListProps } from '../types'
 
 import NewTodo from './NewTodo.vue'
-import TodoList from './TodoList.vue'
 import AppFooter from './AppFooter.vue'
 
 const todolist = useLocalStorage<TodoListProps>('todo-vuejs', [])
+const route = useRoute()
 
 const id = ref(0)
 const todoCount = ref(0)
@@ -59,8 +60,10 @@ watch(todolist, (newList) => {
   <section class="todoapp">
     <NewTodo @add-todo="appendNewTodo" />
     <div v-if="todolist.length > 0">
-      <TodoList :todolist="todolist" @toggle-complete="toggleCompletedState" @delete-item="deleteItem"
-        @update-item="updateItem" />
+
+      <RouterView :key="route.path" :todolist="todolist" @toggle-complete="toggleCompletedState"
+        @delete-item="deleteItem" @update-item="updateItem" />
+
       <AppFooter :count="todoCount" :completedCount="completedCount" @clear-completed="clearCompleted" />
     </div>
   </section>

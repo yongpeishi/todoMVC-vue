@@ -1,11 +1,17 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
 import TodoApp from '../components/TodoApp.vue'
-import ActiveTodo from '../components/ActiveTodos.vue'
+import TodoList from '../components/TodoList.vue'
 
 const routes = [
-  { path: '/', component: TodoApp },
-  { path: '/active', component: ActiveTodo },
-  // { path: '/completed', component: TodoApp },
+  {
+    path: '/',
+    component: TodoApp,
+    children: [
+      { path: '', name: 'all', component: TodoList, props: { filter: 'all' } },
+      { path: 'active', name: 'active', component: TodoList, props: { filter: 'active' } },
+      // { path: '/completed', name: 'completed', component: TodoApp },
+    ],
+  },
 ]
 
 const router = createRouter({

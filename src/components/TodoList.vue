@@ -2,9 +2,12 @@
 import { nextTick, ref } from 'vue';
 import type { TodoListProps } from '@/types';
 
-const { todolist } = defineProps<{
-  todolist: TodoListProps
+const { todolist, filter } = defineProps<{
+  todolist: TodoListProps,
+  filter: string
 }>()
+
+console.log('filter from route: ' + filter)
 
 const activeEditId = ref<number | null>(null)
 const itemEditRef = ref<Record<number, HTMLInputElement | null>>({})
