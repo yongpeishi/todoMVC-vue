@@ -8,8 +8,8 @@ const router = createRouter({
   history: createMemoryHistory(),
   routes: [
     { path: '/', component: TodoApp },
-    // { path: '/active', component: ActiveTodos },
-    // { path: '/completed', component: CompletedTodos },
+    { path: '/active', component: TodoApp },
+    { path: '/completed', component: TodoApp },
   ],
 })
 
