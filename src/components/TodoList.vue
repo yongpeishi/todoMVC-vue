@@ -47,7 +47,8 @@ const isEditing = (itemId: number) => activeEditId.value === itemId
           <button class="destroy" @click="deleteItem(item.id)"></button>
         </div>
         <input v-show="isEditing(item.id)" type="text" class="new-todo" :value="item.text"
-          :ref="i => itemEditRef[item.id] = i as HTMLInputElement" @keyup.enter="updateItemText(item.id)" />
+          :ref="i => itemEditRef[item.id] = i as HTMLInputElement" @keyup.enter="updateItemText(item.id)"
+          @blur="updateItemText(item.id)" />
       </li>
     </ul>
   </section>
