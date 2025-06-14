@@ -42,7 +42,7 @@ const updateItem = (id: number, newText: string) => {
 }
 
 watch(todolist, (newList) => {
-  todoCount.value = newList.length
+  todoCount.value = newList.filter(item => !item.completed).length
 }, { deep: true })
 
 </script>
