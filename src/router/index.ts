@@ -15,7 +15,13 @@ const routes = [
         component: TodoList,
         props: { filter: 'active' },
       },
-      // { path: '/completed', name: 'completed', component: TodoApp },
+      {
+        path: 'completed',
+        name: 'completed',
+        key: 'completed',
+        component: TodoList,
+        props: { filter: 'completed' },
+      },
     ],
   },
 ]

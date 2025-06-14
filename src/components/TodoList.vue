@@ -11,6 +11,8 @@ console.log('filter from route: ' + filter)
 const filteredList = ((filterParam: string) => {
   if (filterParam === 'active') {
     return todolist.filter(item => !item.completed)
+  } else if (filterParam === 'completed') {
+    return todolist.filter(item => item.completed)
   }
   return todolist
 })(filter)

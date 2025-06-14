@@ -10,8 +10,8 @@
     <li>
       <RouterLink :to="{ name: 'active' }">Active</RouterLink>
     </li>
-    <!-- <li>
-      <RouterLink to="#/completed">Completed</RouterLink>
-    </li> -->
+    <li>
+      <RouterLink :to="{ name: 'completed' }">Completed</RouterLink>
+    </li>
   </ul>
 </template>
