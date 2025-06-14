@@ -3,4 +3,4 @@ export type TodoItem = {
   text: string
   completed: boolean
 }
-export type TodoListProps = TodoItem[]
+export type TodoList = TodoItem[]

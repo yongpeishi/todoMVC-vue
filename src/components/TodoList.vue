@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { nextTick, ref } from 'vue';
-import type { TodoListProps } from '@/types';
+import type { TodoList } from '@/types';
 
 const { todolist, filter } = defineProps<{
-  todolist: TodoListProps,
+  todolist: TodoList,
   filter: string
 }>()
 

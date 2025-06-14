@@ -3,12 +3,12 @@ import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router';
 import { useLocalStorage } from '@vueuse/core'
 
-import type { TodoListProps } from '../types'
+import type { TodoList } from '../types'
 
 import NewTodo from './NewTodo.vue'
 import AppFooter from './AppFooter.vue'
 
-const todolist = useLocalStorage<TodoListProps>('todo-vuejs', [])
+const todolist = useLocalStorage<TodoList>('todo-vuejs', [])
 const route = useRoute()
 
 const id = ref(0)
