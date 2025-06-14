@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useLocalStorage } from '@vueuse/core'
+
 import type { TodoListProps } from './types'
+
 import NewTodo from './components/NewTodo.vue'
 import TodoList from './components/TodoList.vue'
 import AppFooter from './components/AppFooter.vue'
 
+const todolist = useLocalStorage<TodoListProps>('todo-vuejs', [])
+
 const id = ref(0)
-//TODO: should this be reactive instead of ref?
-const todolist = ref<TodoListProps>([])
 const todoCount = ref(0)
 const completedCount = ref(0)
 
