@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
+const route = useRoute()
 </script>
 
 <template>
-  <RouterView />
+  <RouterView :key="route.path" />
 
   <footer class="info">
     <p>Double-click to edit a todo</p>
