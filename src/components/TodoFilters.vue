@@ -5,13 +5,13 @@
 <template>
   <ul class="filters">
     <li>
-      <RouterLink class="selected" to="/">All</RouterLink>
+      <RouterLink to="/">All</RouterLink>
     </li>
     <li>
-      <RouterLink to="#/active">Active</RouterLink>
+      <RouterLink to="/active">Active</RouterLink>
     </li>
-    <li>
+    <!-- <li>
       <RouterLink to="#/completed">Completed</RouterLink>
-    </li>
+    </li> -->
   </ul>
 </template>
