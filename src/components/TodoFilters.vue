@@ -5,10 +5,10 @@
 <template>
   <ul class="filters">
     <li>
-      <RouterLink to="/">All</RouterLink>
+      <RouterLink :to="{ name: 'all' }">All</RouterLink>
     </li>
     <li>
-      <RouterLink to="/active">Active</RouterLink>
+      <RouterLink :to="{ name: 'active' }">Active</RouterLink>
     </li>
     <!-- <li>
       <RouterLink to="#/completed">Completed</RouterLink>

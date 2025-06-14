@@ -8,6 +8,12 @@ const { todolist, filter } = defineProps<{
 }>()
 
 console.log('filter from route: ' + filter)
+const filteredList = ((filterParam: string) => {
+  if (filterParam === 'active') {
+    return todolist.filter(item => !item.completed)
+  }
+  return todolist
+})(filter)
 
 const activeEditId = ref<number | null>(null)
 const itemEditRef = ref<Record<number, HTMLInputElement | null>>({})
@@ -56,7 +62,8 @@ const removeEdit = () => {
 <template>
   <section class="main">
     <ul class="todo-list">
-      <li v-for="item in todolist" :key="item.id" :class="{ completed: item.completed, editing: isEditing(item.id) }">
+      <li v-for="item in filteredList" :key="item.id"
+        :class="{ completed: item.completed, editing: isEditing(item.id) }">
         <div class="view">
           <input class="toggle" type="checkbox" :checked="item.completed" @click="toggleComplete(item.id)" />
           <label @dblclick="editItem(item.id)">{{ item.text }}</label>
