@@ -9,7 +9,7 @@ const { todolist } = defineProps<{
 const activeEditId = ref<number | null>(null)
 const itemEditRef = ref<Record<number, HTMLInputElement | null>>({})
 
-const emit = defineEmits(['toggle-complete', 'delete-item', 'update-todo'])
+const emit = defineEmits(['toggle-complete', 'delete-item', 'update-item'])
 
 const toggleComplete = (itemId: number) => {
   emit('toggle-complete', itemId)
@@ -28,8 +28,11 @@ const editItem = (itemId: number) => {
 
 const updateItemText = (itemId: number) => {
   const enteredText = itemEditRef.value[itemId]?.value.trim()
-  emit('update-todo', itemId, enteredText)
+  emit('update-item', itemId, enteredText)
+
+  activeEditId.value = null
 }
+
 const isEditing = (itemId: number) => activeEditId.value === itemId
 
 </script>

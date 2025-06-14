@@ -6,6 +6,7 @@ import TodoList from './components/TodoList.vue'
 import AppFooter from './components/AppFooter.vue'
 
 const id = ref(0)
+//TODO: should this be reactive instead of ref?
 const todolist = ref<TodoListProps>([])
 const todoCount = ref(0)
 
@@ -17,6 +18,7 @@ const appendNewTodo = (todoText: string) => {
   })
 }
 
+//TODO: Can DRY up these functions
 const toggleCompletedState = (id: number) => {
   const item = todolist.value.find(item => item.id === id)
   if (item) {
@@ -32,6 +34,13 @@ const deleteItem = (id: number) => {
   }
 }
 
+const updateItem = (id: number, newText: string) => {
+  const item = todolist.value.find(item => item.id === id)
+  if (item) {
+    item.text = newText
+  }
+}
+
 watch(todolist, (newList) => {
   todoCount.value = newList.length
 }, { deep: true })
@@ -42,7 +51,8 @@ watch(todolist, (newList) => {
   <section class="todoapp">
     <NewTodo @add-todo="appendNewTodo" />
     <div v-if="todoCount > 0">
-      <TodoList :todolist="todolist" @toggle-complete="toggleCompletedState" @delete-item="deleteItem" />
+      <TodoList :todolist="todolist" @toggle-complete="toggleCompletedState" @delete-item="deleteItem"
+        @update-item="updateItem" />
       <AppFooter :count="todoCount" />
     </div>
   </section>
