@@ -50,7 +50,7 @@ watch(todolist, (newList) => {
 <template>
   <section class="todoapp">
     <NewTodo @add-todo="appendNewTodo" />
-    <div v-if="todoCount > 0">
+    <div v-if="todolist.length > 0">
       <TodoList :todolist="todolist" @toggle-complete="toggleCompletedState" @delete-item="deleteItem"
         @update-item="updateItem" />
       <AppFooter :count="todoCount" />
