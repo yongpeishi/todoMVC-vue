@@ -42,6 +42,10 @@ const updateItem = (id: number, newText: string) => {
   }
 }
 
+const clearCompleted = () => {
+  todolist.value = todolist.value.filter(item => !item.completed)
+}
+
 watch(todolist, (newList) => {
   todoCount.value = newList.filter(item => !item.completed).length
   completedCount.value = todolist.value.length - todoCount.value
@@ -55,7 +59,7 @@ watch(todolist, (newList) => {
     <div v-if="todolist.length > 0">
       <TodoList :todolist="todolist" @toggle-complete="toggleCompletedState" @delete-item="deleteItem"
         @update-item="updateItem" />
-      <AppFooter :count="todoCount" :completedCount="completedCount" />
+      <AppFooter :count="todoCount" :completedCount="completedCount" @clear-completed="clearCompleted" />
     </div>
   </section>
 
