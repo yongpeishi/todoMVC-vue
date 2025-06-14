@@ -9,6 +9,7 @@ const id = ref(0)
 //TODO: should this be reactive instead of ref?
 const todolist = ref<TodoListProps>([])
 const todoCount = ref(0)
+const completedCount = ref(0)
 
 const appendNewTodo = (todoText: string) => {
   todolist.value.push({
@@ -43,6 +44,7 @@ const updateItem = (id: number, newText: string) => {
 
 watch(todolist, (newList) => {
   todoCount.value = newList.filter(item => !item.completed).length
+  completedCount.value = todolist.value.length - todoCount.value
 }, { deep: true })
 
 </script>
@@ -53,7 +55,7 @@ watch(todolist, (newList) => {
     <div v-if="todolist.length > 0">
       <TodoList :todolist="todolist" @toggle-complete="toggleCompletedState" @delete-item="deleteItem"
         @update-item="updateItem" />
-      <AppFooter :count="todoCount" />
+      <AppFooter :count="todoCount" :completedCount="completedCount" />
     </div>
   </section>
 
