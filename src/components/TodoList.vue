@@ -26,14 +26,27 @@ const editItem = (itemId: number) => {
   })
 }
 
+const triggerBlur = (itemId: number) => {
+  itemEditRef.value[itemId]?.blur()
+}
+
 const updateItemText = (itemId: number) => {
   const enteredText = itemEditRef.value[itemId]?.value.trim()
-  emit('update-item', itemId, enteredText)
+
+  if (enteredText == '') {
+    deleteItem(itemId)
+  } else {
+    emit('update-item', itemId, enteredText)
+  }
 
   activeEditId.value = null
 }
 
 const isEditing = (itemId: number) => activeEditId.value === itemId
+
+const removeEdit = () => {
+  activeEditId.value = null
+}
 
 </script>
 
@@ -47,8 +60,8 @@ const isEditing = (itemId: number) => activeEditId.value === itemId
           <button class="destroy" @click="deleteItem(item.id)"></button>
         </div>
         <input v-show="isEditing(item.id)" type="text" class="new-todo" :value="item.text"
-          :ref="i => itemEditRef[item.id] = i as HTMLInputElement" @keyup.enter="updateItemText(item.id)"
-          @blur="updateItemText(item.id)" />
+          :ref="i => itemEditRef[item.id] = i as HTMLInputElement" @keyup.enter="triggerBlur(item.id)"
+          @keyup.esc="removeEdit" @blur="updateItemText(item.id)" />
       </li>
     </ul>
   </section>
