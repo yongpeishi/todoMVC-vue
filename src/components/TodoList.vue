@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { nextTick, ref } from 'vue';
 import type { TodoListProps } from '@/types';
 
 const { todolist } = defineProps<{
@@ -7,6 +7,7 @@ const { todolist } = defineProps<{
 }>()
 
 const activeEditId = ref<number | null>(null)
+const itemEditRef = ref<Record<number, HTMLInputElement | null>>({})
 
 const emit = defineEmits(['toggle-complete', 'delete-item', 'update-todo'])
 
@@ -20,12 +21,13 @@ const deleteItem = (itemId: number) => {
 
 const editItem = (itemId: number) => {
   activeEditId.value = itemId
+  nextTick(() => {
+    itemEditRef.value[itemId]?.focus()
+  })
 }
 
-const editedText = ref('')
 const updateItemText = (itemId: number) => {
-  const enteredText = editedText.value.trim()
-
+  const enteredText = itemEditRef.value[itemId]?.value.trim()
   emit('update-todo', itemId, enteredText)
 }
 const isEditing = (itemId: number) => activeEditId.value === itemId
@@ -41,8 +43,8 @@ const isEditing = (itemId: number) => activeEditId.value === itemId
           <label @dblclick="editItem(item.id)">{{ item.text }}</label>
           <button class="destroy" @click="deleteItem(item.id)"></button>
         </div>
-        <input v-show="isEditing(item.id)" type="text" class="new-todo" :value="item.text" ref="editedText"
-          @keyup.enter="updateItemText(item.id)" />
+        <input v-show="isEditing(item.id)" type="text" class="new-todo" :value="item.text"
+          :ref="i => itemEditRef[item.id] = i as HTMLInputElement" @keyup.enter="updateItemText(item.id)" />
       </li>
     </ul>
   </section>
