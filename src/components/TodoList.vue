@@ -7,7 +7,6 @@ const { todolist, filter } = defineProps<{
   filter: string
 }>()
 
-console.log('filter from route: ' + filter)
 const filteredList = ((filterParam: string) => {
   if (filterParam === 'active') {
     return todolist.filter(item => !item.completed)
