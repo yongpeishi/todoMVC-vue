@@ -11,7 +11,11 @@ import AppFooter from './AppFooter.vue'
 const route = useRoute()
 const todolist = useLocalStorage<TodoList>('todo-vuejs', [])
 
-const id = ref(0)
+const id = ref(
+  todolist.value.length > 0
+    ? Math.max(...todolist.value.map(item => item.id)) + 1
+    : 0
+)
 const activeTodoCount = computed(() => {
   return todolist.value.filter(item => !item.completed).length
 })
