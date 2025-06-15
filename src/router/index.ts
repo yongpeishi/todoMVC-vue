@@ -7,18 +7,16 @@ const routes = [
     path: '/',
     component: TodoApp,
     children: [
-      { path: '', name: 'all', key: 'all', component: TodoList, props: { filter: 'all' } },
+      { path: '', name: 'all', component: TodoList, props: { filter: 'all' } },
       {
         path: 'active',
         name: 'active',
-        key: 'active',
         component: TodoList,
         props: { filter: 'active' },
       },
       {
         path: 'completed',
         name: 'completed',
-        key: 'completed',
         component: TodoList,
         props: { filter: 'completed' },
       },
