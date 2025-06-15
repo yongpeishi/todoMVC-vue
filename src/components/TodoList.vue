@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import type { TodoList } from '@/types';
 
 const { todolist, filter } = defineProps<{
@@ -7,14 +7,15 @@ const { todolist, filter } = defineProps<{
   filter: string
 }>()
 
-const filteredList = ((filterParam: string) => {
+const processTodoListByFilter = (filterParam: string) => {
   if (filterParam === 'active') {
     return todolist.filter(item => !item.completed)
   } else if (filterParam === 'completed') {
     return todolist.filter(item => item.completed)
   }
   return todolist
-})(filter)
+}
+const filteredList = computed(() => processTodoListByFilter(filter))
 
 const activeEditId = ref<number | null>(null)
 const itemEditRef = ref<Record<number, HTMLInputElement | null>>({})
