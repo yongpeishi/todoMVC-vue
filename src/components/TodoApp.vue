@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router';
 import { useLocalStorage } from '@vueuse/core'
 
@@ -8,12 +8,16 @@ import type { TodoList } from '../types'
 import NewTodo from './NewTodo.vue'
 import AppFooter from './AppFooter.vue'
 
-const todolist = useLocalStorage<TodoList>('todo-vuejs', [])
 const route = useRoute()
+const todolist = useLocalStorage<TodoList>('todo-vuejs', [])
 
 const id = ref(0)
-const todoCount = ref(0)
-const completedCount = ref(0)
+const activeTodoCount = computed(() => {
+  return todolist.value.filter(item => !item.completed).length
+})
+const completedCount = computed(() => {
+  return todolist.value.filter(item => item.completed).length
+})
 
 const appendNewTodo = (todoText: string) => {
   todolist.value.push({
@@ -50,10 +54,6 @@ const clearCompleted = () => {
   todolist.value = todolist.value.filter(item => !item.completed)
 }
 
-watch(todolist, (newList) => {
-  todoCount.value = newList.filter(item => !item.completed).length
-  completedCount.value = todolist.value.length - todoCount.value
-}, { deep: true })
 </script>
 
 <template>
@@ -64,7 +64,7 @@ watch(todolist, (newList) => {
       <RouterView :key="route.path" :todolist="todolist" @toggle-complete="toggleCompletedState"
         @delete-item="deleteItem" @update-item="updateItem" />
 
-      <AppFooter :count="todoCount" :completedCount="completedCount" @clear-completed="clearCompleted" />
+      <AppFooter :count="activeTodoCount" :completedCount="completedCount" @clear-completed="clearCompleted" />
     </div>
   </section>
 </template>
